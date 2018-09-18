@@ -1,12 +1,6 @@
-package controller;
+package model;
 
 import java.util.Scanner;
-
-import model.Apartment;
-import model.DateTime;
-import model.Property;
-import model.Suit;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 
