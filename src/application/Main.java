@@ -22,7 +22,7 @@ public class Main extends Application {
 	
 	public void showMainView(){
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("..//view//Sample.fxml"));
+		loader.setLocation(Main.class.getResource("..//view//MainProgramWindow.fxml"));
 		try {
 			mainLayout = loader.load();
 		} catch (IOException e) {
