@@ -8,9 +8,10 @@
    <top>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" text="Button1" />
-            <Button mnemonicParsing="false" text="Button2" />
-            <Button mnemonicParsing="false" text="Button3" />
+          <Button mnemonicParsing="false" text="Home" />
+            <Button mnemonicParsing="false" text="Import" />
+            <Button mnemonicParsing="false" text="Export" />
+            <Button mnemonicParsing="false" text="Quite" />
         </items>
       </ToolBar>
    </top>
