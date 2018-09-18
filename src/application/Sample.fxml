@@ -10,6 +10,7 @@
         <items>
           <Button mnemonicParsing="false" text="Button1" />
             <Button mnemonicParsing="false" text="Button2" />
+            <Button mnemonicParsing="false" text="Button3" />
         </items>
       </ToolBar>
    </top>
