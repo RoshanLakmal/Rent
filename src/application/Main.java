@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class SampleMain extends Application {
+public class Main extends Application {
 
 	private Stage primaryStage;
 	private BorderPane mainLayout;
@@ -22,7 +22,7 @@ public class SampleMain extends Application {
 	
 	public void showMainView(){
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(SampleMain.class.getResource("Sample.fxml"));
+		loader.setLocation(Main.class.getResource("..//view//Sample.fxml"));
 		try {
 			mainLayout = loader.load();
 		} catch (IOException e) {
