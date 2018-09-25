@@ -10,7 +10,12 @@ public abstract class Property {
 		protected String property_status;
 		protected DateTime lastMaintenanceDate;
 		protected RentalRecords[] arr;
-		
+
+		public Property(String property_Id,String property_type){
+			this.property_Id = property_Id;
+			this.property_type = property_type;
+		}
+
 public Property(String property_Id, String Street_num, String Street_name, String Suburb, int Num_of_beds, String property_type, String property_status, DateTime lastMaintenanceDate)
 
 {

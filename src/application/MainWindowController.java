@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.layout.BorderPane;
+import model.*;
 
 public class MainWindowController {
 	
@@ -34,11 +35,11 @@ public class MainWindowController {
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
         Optional<ButtonType> result = dialog.showAndWait();
-//        if(result.isPresent() && result.get() == ButtonType.OK) {
-//            ContactController contactController = fxmlLoader.getController();
-//            Contact newContact = contactController.getNewContact();
-//            data.addContact(newContact);
-//            data.saveContacts();
-//        }
+        
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+        	AddPropertyWindowController addPropertyController = fxmlLoader.getController();
+            Property newContact = addPropertyController.getNewProperty();
+            System.out.println(newContact.getDetails());
+        }
 	}
 }

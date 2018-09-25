@@ -3,6 +3,10 @@ public class Apartment extends Property {
     private int numRec = 0;
 	double rent = 0;
 	
+	public Apartment(String property_Id,String property_type){
+		super(property_Id,property_type);
+	}
+	
 	public Apartment(String property_Id, String Street_num, String Street_name, String Suburb, int Num_of_beds,
 			String property_type, String property_status, DateTime lastMaintenanceDate) {
 		super(property_Id, Street_num, Street_name, Suburb, Num_of_beds, property_type, property_status, lastMaintenanceDate);

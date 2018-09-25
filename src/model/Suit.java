@@ -4,6 +4,10 @@ public class Suit extends Property {
 	int numRec = 0;
 	double rent = 0;
 	
+	public Suit(String property_Id,String property_type){
+		super(property_Id,property_type);
+	}
+	
 	public Suit(String property_Id, String Street_num, String Street_name, String Suburb, int Num_of_beds,
 			String property_type, String property_status, DateTime lastMaintenaceDate)
 	{
