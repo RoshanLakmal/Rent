@@ -1,19 +1,22 @@
 package model;
+
+import javafx.beans.property.SimpleStringProperty;
+
 public class Suit extends Property {
 	
 	int numRec = 0;
 	double rent = 0;
 	
-	public Suit(String property_Id,String property_type){
-		super(property_Id,property_type);
+	public Suit(){
+		super();
 	}
 	
-	public Suit(String property_Id, String Street_num, String Street_name, String Suburb, int Num_of_beds,
-			String property_type, String property_status, DateTime lastMaintenaceDate)
-	{
-	super(property_Id, Street_num, Street_name, Suburb, Num_of_beds, property_type, property_status,lastMaintenaceDate);
-	
-	}
+//	public Suit(SimpleStringProperty property_Id, String Street_num, String Street_name, String Suburb, int Num_of_beds,
+//			SimpleStringProperty property_type, String property_status, DateTime lastMaintenaceDate)
+//	{
+//	super(property_Id, Street_num, Street_name, Suburb, Num_of_beds, property_type, property_status,lastMaintenaceDate);
+//	
+//	}
 	
 	public boolean rent(String customerid, DateTime rentDate , int numOfRentDays)      //Renting a suit
 	{

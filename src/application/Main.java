@@ -15,28 +15,29 @@ public class Main extends Application {
 	 
 	 
 
-	DataSource datasource = new DataSource();
+	
 	    
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		
-		if(!datasource.open()) {
-            System.out.println("Can't open datasource");
-            return;
-        }
-		
-		List<Property> propertys = datasource.queryArtists();
-        if(propertys == null) {
-            System.out.println("No artists!");
-            return;
-        }
-
-        for(Property property : propertys) {
-            System.out.println(property.getDetails());
-        }
-
-		
-        datasource.close();
+//		if(!datasource.open()) {
+//            System.out.println("Can't open datasource");
+//            return;
+//        }
+//		
+//		List<Property> propertys = datasource.queryArtists();
+//        if(propertys == null) {
+//            System.out.println("No artists!");
+//            return;
+//        }
+//
+//        for(Property property : propertys) {
+//            System.out.println(property.getDetails());
+//        }
+//
+//		
+//        datasource.close();
+        
 //		try {
 //            Connection conn = DriverManager.getConnection(CONNECTION_STRING);
 //            Statement statement = conn.createStatement();
@@ -68,13 +69,36 @@ public class Main extends Application {
 //        } catch (SQLException e) {
 //            System.out.println("Something went wrong: " + e.getMessage());
 //        }
-		
-		Parent root = FXMLLoader.load(getClass().getResource("MainProgramWindow.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("MainProgramWindow.fxml"));
+        Parent root = loader.load();
+        MainWindowController controller = loader.getController();
+        controller.listPropertys();
+//		Parent root = FXMLLoader.load(getClass().getResource("MainProgramWindow.fxml"));
         primaryStage.setTitle("FLEXIRENT SYSTEM");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
 	}
 	
+	
+	
+	@Override
+	public void init() throws Exception {
+		// TODO Auto-generated method stub
+		super.init();
+		DataSource.getInstance().open();
+	}
+
+
+
+	@Override
+	public void stop() throws Exception {
+		// TODO Auto-generated method stub
+		super.stop();
+		DataSource.getInstance().close();
+	}
+
+
+
 	public static void main(String[] args) {
 		launch(args);
 	}

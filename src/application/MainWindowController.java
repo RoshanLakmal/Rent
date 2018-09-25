@@ -3,10 +3,15 @@ package application;
 import java.io.IOException;
 import java.util.Optional;
 
+import database.DataSource;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import model.*;
 
@@ -14,6 +19,15 @@ public class MainWindowController {
 	
 	@FXML
     private BorderPane mainPanel;
+	
+	@FXML
+	private TableView propertyTable;
+	
+	public void listPropertys(){
+		Task<ObservableList<Property>> task = new GetAllPropertyTask();
+		propertyTable.itemsProperty().bind(task.valueProperty());
+		new Thread(task).start();
+	}
 	
 	@FXML
     public void showAddContactDialog() {
@@ -42,4 +56,17 @@ public class MainWindowController {
             System.out.println(newContact.getDetails());
         }
 	}
+}
+
+class GetAllPropertyTask extends Task {
+
+	@Override
+	public ObservableList<Property> call() {
+		// TODO Auto-generated method stub
+		return FXCollections.observableArrayList
+				(DataSource.getInstance().queryArtists());
+	}
+	
+	
+	
 }

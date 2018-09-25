@@ -2,12 +2,14 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.SimpleStringProperty;
 import model.*;
 
 public class DataSource {
@@ -21,7 +23,15 @@ public class DataSource {
 	 public static final String COLUMN_PROPERTY_TYPE = "property_type";
 
   private Connection conn;
+  
+  private PreparedStatement insertProperty;
 
+  private static DataSource instance = new DataSource();
+  
+  public static DataSource getInstance() {
+      return instance;
+  }
+  
   public boolean open() {
       try {
           conn = DriverManager.getConnection(CONNECTION_STRING);
@@ -50,13 +60,20 @@ public class DataSource {
           List<Property> property = new ArrayList<>();
           
           while(results.next()) {
-        	  Property newProperty = null;
-        	  if(results.getString(COLUMN_PROPERTY_TYPE).equals("APARTMENT")){
-        		  newProperty = new Apartment(results.getString(COLUMN_PROPERTY_ID),results.getString(COLUMN_PROPERTY_TYPE));
-        	  }else if (results.getString(COLUMN_PROPERTY_TYPE).equals("SUIT")){
-        		  newProperty = new Suit(results.getString(COLUMN_PROPERTY_ID),results.getString(COLUMN_PROPERTY_TYPE));
-        	  }
-        	  
+        	  Property newProperty = new Apartment();
+    		  newProperty.setProperty_Id(results.getString(COLUMN_PROPERTY_ID));
+    		  newProperty.setProperty_type(results.getString(COLUMN_PROPERTY_TYPE));
+//        	  if(results.getString(COLUMN_PROPERTY_TYPE).equals("APARTMENT")){
+//        		  newProperty = new Apartment();
+//        		  newProperty.setProperty_Id(results.getString(COLUMN_PROPERTY_ID));
+//        		  newProperty.setProperty_type(results.getString(COLUMN_PROPERTY_TYPE));
+////        		  newProperty = new Apartment(results.getString(COLUMN_PROPERTY_ID),results.getString(COLUMN_PROPERTY_TYPE));
+//        	  }else if (results.getString(COLUMN_PROPERTY_TYPE).equals("SUIT")){
+//        		  newProperty = new Suit();
+//        		  newProperty.setProperty_Id(results.getString(COLUMN_PROPERTY_ID));
+//        		  newProperty.setProperty_type(results.getString(COLUMN_PROPERTY_TYPE));  
+//        	  }
+//        	  
 //              Property artist = new Property();
 //              artist.setId(results.getInt(COLUMN_ARTIST_ID));
 //              artist.setName(results.getString(COLUMN_ARTIST_NAME));

@@ -20,7 +20,7 @@ public class AddPropertyWindowController {
         
         if(propertyType.equals("APARTMENT"))
 		{
-        	newProperty = new Apartment(propertyId,propertyType);
+//        	newProperty = new Apartment(propertyId,propertyType);
 //			Property a1 = new Apartment(id, number, name, suburb, num, type, "Available",  new DateTime(1,1,0000));	
 //			myProperty[propertyCount] = a1;
 //			propertyCount++;
@@ -28,7 +28,7 @@ public class AddPropertyWindowController {
 		}
 		else if(propertyType.equals("SUIT"))
 		{
-			newProperty = new Suit(propertyId,propertyType);
+//			newProperty = new Suit(propertyId,propertyType);
 //			System.out.println("Enter the last maintenace date: ");
 //			System.out.print("Day: ");
 //			int day = sc.nextInt();

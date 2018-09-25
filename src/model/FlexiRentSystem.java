@@ -108,26 +108,26 @@ switch(number) {
 		if (accepted) {
 			if(type.equals("Apartment"))
 			{
-				Property a1 = new Apartment(id, number, name, suburb, num, type, "Available",  new DateTime(1,1,0000));	
-				myProperty[propertyCount] = a1;
-				propertyCount++;
-				System.out.println(propertyCount + " properties listed in the system");
+//				Property a1 = new Apartment(id, number, name, suburb, num, type, "Available",  new DateTime(1,1,0000));	
+//				myProperty[propertyCount] = a1;
+//				propertyCount++;
+//				System.out.println(propertyCount + " properties listed in the system");
 			}
 			else if(type.equals("Suit"))
 			{
-				System.out.println("Enter the last maintenace date: ");
-				System.out.print("Day: ");
-				int day = sc.nextInt();
-				System.out.print("Month: ");
-				int month = sc.nextInt();
-				System.out.print("Year: ");
-				int year = sc.nextInt();  							
-				DateTime t = new DateTime(day,month,year);
-				System.out.println("Last maintenance date is " + t.getFormattedDate());
-				Property a1 = new Suit(id, number, name, suburb, num, type, "Available",  t);	
-				myProperty[propertyCount] = a1;
-				propertyCount++;
-				System.out.println(propertyCount + " properties listed in the system");
+//				System.out.println("Enter the last maintenace date: ");
+//				System.out.print("Day: ");
+//				int day = sc.nextInt();
+//				System.out.print("Month: ");
+//				int month = sc.nextInt();
+//				System.out.print("Year: ");
+//				int year = sc.nextInt();  							
+//				DateTime t = new DateTime(day,month,year);
+//				System.out.println("Last maintenance date is " + t.getFormattedDate());
+//				Property a1 = new Suit(id, number, name, suburb, num, type, "Available",  t);	
+//				myProperty[propertyCount] = a1;
+//				propertyCount++;
+//				System.out.println(propertyCount + " properties listed in the system");
 			}
 			}
 		
