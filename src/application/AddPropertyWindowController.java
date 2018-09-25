@@ -13,7 +13,21 @@ public class AddPropertyWindowController {
     @FXML
     private TextField property_type;
     
-    public Property getNewProperty() {
+    
+    
+    public TextField getProperty_Id() {
+		return property_Id;
+	}
+
+
+
+	public TextField getProperty_type() {
+		return property_type;
+	}
+
+
+
+	public Property getNewProperty() {
         String propertyId = property_Id.getText();
         String propertyType = property_type.getText();
         Property newProperty = null;

@@ -21,6 +21,12 @@ public class DataSource {
 	 public static final String TABLE_PROPERTY = "RENTAL_PROPERTY";
 	 public static final String COLUMN_PROPERTY_ID = "property_Id";
 	 public static final String COLUMN_PROPERTY_TYPE = "property_type";
+	 
+	 public static final String INSERT_PROPERTY = "INSERT INTO " + TABLE_PROPERTY +
+	            '(' + COLUMN_PROPERTY_ID + ", " + COLUMN_PROPERTY_TYPE + ") VALUES(?, ?)";
+	 
+	 public static final String QUERY_PROPERTY_ID = "SELECT " + COLUMN_PROPERTY_ID + " FROM " +
+			 TABLE_PROPERTY + " WHERE " + COLUMN_PROPERTY_ID + " = ?";
 
   private Connection conn;
   
@@ -35,6 +41,7 @@ public class DataSource {
   public boolean open() {
       try {
           conn = DriverManager.getConnection(CONNECTION_STRING);
+          insertProperty = conn.prepareStatement(INSERT_PROPERTY, Statement.RETURN_GENERATED_KEYS);
           return true;
       } catch(SQLException e) {
           System.out.println("Couldn't connect to database: " + e.getMessage());
@@ -46,6 +53,10 @@ public class DataSource {
       try {
           if(conn != null) {
               conn.close();
+          }
+          
+          if(insertProperty != null) {
+        	  insertProperty.close();
           }
       } catch(SQLException e) {
           System.out.println("Couldn't close connection: " + e.getMessage());
@@ -93,5 +104,30 @@ public class DataSource {
           return null;
       }
 
+  }
+  
+  public int insertProperty(String propertyId, String propertyType) throws SQLException {
+
+//      queryAlbum.setString(1, name);
+//      ResultSet results = queryAlbum.executeQuery();
+//      if(results.next()) {
+//          return results.getInt(1);
+//      } else {
+          // Insert the album
+	  insertProperty.setString(1, propertyId);
+	  insertProperty.setString(2, propertyType);
+          int affectedRows = insertProperty.executeUpdate();
+
+          if(affectedRows != 1) {
+              throw new SQLException("Couldn't insert album!");
+          }
+
+          ResultSet generatedKeys = insertProperty.getGeneratedKeys();
+          if(generatedKeys.next()) {
+              return generatedKeys.getInt(1);
+          } else {
+              throw new SQLException("Couldn't get _id for album");
+          }
+//      }
   }
 }

@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 import database.DataSource;
@@ -30,7 +31,7 @@ public class MainWindowController {
 	}
 	
 	@FXML
-    public void showAddContactDialog() {
+    public void showAddContactDialog() throws SQLException {
 		Dialog<ButtonType> dialog = new Dialog<ButtonType>();
         dialog.initOwner(mainPanel.getScene().getWindow());
         dialog.setTitle("Add New Contact");
@@ -51,9 +52,12 @@ public class MainWindowController {
         Optional<ButtonType> result = dialog.showAndWait();
         
         if(result.isPresent() && result.get() == ButtonType.OK) {
+        	
         	AddPropertyWindowController addPropertyController = fxmlLoader.getController();
             Property newContact = addPropertyController.getNewProperty();
-            System.out.println(newContact.getDetails());
+            DataSource.getInstance().insertProperty(addPropertyController.getProperty_Id().getText(),addPropertyController.getProperty_type().getText());
+            listPropertys();
+//            System.out.println(newContact.getDetails());
         }
 	}
 }
