@@ -6,6 +6,6 @@ public class MainWindowController {
 	
 	@FXML
     public void showAddContactDialog() {
-		
+		System.out.println("Hi");
 	}
 }

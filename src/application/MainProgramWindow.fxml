@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
@@ -12,15 +13,22 @@
 <BorderPane fx:id="mainPanel" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainWindowController">
 
 	<top>
-        <MenuBar>
-            <menus>
-                <Menu text="Contacts">
-                    <items>
-                        <MenuItem text="Add..." onAction="#showAddContactDialog"/>
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
+		<VBox>
+			<!-- <MenuBar>
+            	<menus>
+                	<Menu text="Contacts">
+                    	<items>
+                        	<MenuItem text="Add..." onAction="#showAddContactDialog"/>
+                    	</items>
+                	</Menu>
+            	</menus>
+        	</MenuBar> -->
+        	<ToolBar>
+                <HBox>
+                    <Button text="Add Property" onAction="#showAddContactDialog" />
+                </HBox>
+            </ToolBar>
+    	</VBox> 
     </top>
 
 <center>
