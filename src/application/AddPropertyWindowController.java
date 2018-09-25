@@ -18,7 +18,7 @@ public class AddPropertyWindowController {
         String propertyType = property_type.getText();
         Property newProperty = null;
         
-        if(propertyType.equals("Apartment"))
+        if(propertyType.equals("APARTMENT"))
 		{
         	newProperty = new Apartment(propertyId,propertyType);
 //			Property a1 = new Apartment(id, number, name, suburb, num, type, "Available",  new DateTime(1,1,0000));	
@@ -26,7 +26,7 @@ public class AddPropertyWindowController {
 //			propertyCount++;
 //			System.out.println(propertyCount + " properties listed in the system");
 		}
-		else if(propertyType.equals("Suit"))
+		else if(propertyType.equals("SUIT"))
 		{
 			newProperty = new Suit(propertyId,propertyType);
 //			System.out.println("Enter the last maintenace date: ");
