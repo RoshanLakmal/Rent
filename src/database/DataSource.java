@@ -20,10 +20,29 @@ public class DataSource {
 
 	 public static final String TABLE_PROPERTY = "RENTAL_PROPERTY";
 	 public static final String COLUMN_PROPERTY_ID = "property_Id";
+	 public static final String COLUMN_STREET_NUM = "street_num";
+	 public static final String COLUMN_STREET_NAME = "street_name";
+	 public static final String COLUMN_SUBURB = "suburb";
+	 public static final String COLUMN_PROPERTY_STATUS = "property_status";
 	 public static final String COLUMN_PROPERTY_TYPE = "property_type";
+	
+	 public static final String CREATE_PROPERTY_TABLE = "CREATE TABLE IF NOT EXISTS RENTAL_PROPERTY" +
+			 "(property_Id VARCHAR(255) not NULL, " +
+             " street_num VARCHAR(255), " + 
+             " street_name VARCHAR(255), " + 
+             " suburb VARCHAR(255), " +
+             " property_status VARCHAR(255), " +
+             " property_type VARCHAR(255), " +
+             " PRIMARY KEY ( property_Id ))"; 
+	 
+//	 public static final String CREATE_PROPERTY_TABLEE = "CREATE TABLE IF NOT EXISTS warehouses (\n"
+//             + "	id integer PRIMARY KEY,\n"
+//             + "	name text NOT NULL,\n"
+//             + "	capacity real\n"
+//             + ");";
 	 
 	 public static final String INSERT_PROPERTY = "INSERT INTO " + TABLE_PROPERTY +
-	            '(' + COLUMN_PROPERTY_ID + ", " + COLUMN_PROPERTY_TYPE + ") VALUES(?, ?)";
+	            '(' + COLUMN_PROPERTY_ID + ", " + COLUMN_STREET_NUM + ", " + COLUMN_STREET_NAME + ", " + COLUMN_SUBURB + ", " + COLUMN_PROPERTY_STATUS + ", " + COLUMN_PROPERTY_TYPE + ") VALUES(?, ?, ?, ?, ?, ?)";
 	 
 	 public static final String QUERY_PROPERTY_ID = "SELECT " + COLUMN_PROPERTY_ID + " FROM " +
 			 TABLE_PROPERTY + " WHERE " + COLUMN_PROPERTY_ID + " = ?";
@@ -41,6 +60,8 @@ public class DataSource {
   public boolean open() {
       try {
           conn = DriverManager.getConnection(CONNECTION_STRING);
+          Statement statement = conn.createStatement();
+          statement.executeUpdate(CREATE_PROPERTY_TABLE); 
           insertProperty = conn.prepareStatement(INSERT_PROPERTY, Statement.RETURN_GENERATED_KEYS);
           return true;
       } catch(SQLException e) {
@@ -106,7 +127,7 @@ public class DataSource {
 
   }
   
-  public int insertProperty(String propertyId, String propertyType) throws SQLException {
+  public int insertProperty(String propertyId, String streetNum, String streetName, String suburb, String propertyStatus, String propertyType) throws SQLException {
 
 //      queryAlbum.setString(1, name);
 //      ResultSet results = queryAlbum.executeQuery();
@@ -115,7 +136,11 @@ public class DataSource {
 //      } else {
           // Insert the album
 	  insertProperty.setString(1, propertyId);
-	  insertProperty.setString(2, propertyType);
+	  insertProperty.setString(2, streetNum);
+	  insertProperty.setString(3, streetName);
+	  insertProperty.setString(4, suburb);
+	  insertProperty.setString(5, propertyStatus);
+	  insertProperty.setString(6, propertyType);
           int affectedRows = insertProperty.executeUpdate();
 
           if(affectedRows != 1) {

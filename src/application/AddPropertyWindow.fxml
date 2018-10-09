@@ -10,10 +10,21 @@
         <GridPane vgap="10" hgap="10">
             <Label text="Property ID" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
             <TextField fx:id="property_Id" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-
-            <Label text="Property Type" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <TextField fx:id="property_type" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-
+			
+			<Label text="Street Number" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="street_num" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+			
+            <Label text="Street Name" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="street_name" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+			
+			<Label text="Suburb" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="suburb" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+            
+            <Label text="Property Type" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <TextField fx:id="property_type" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+            
+            <Label text="Property Status" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <TextField fx:id="property_status" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
         </GridPane>
     </content>
 </DialogPane>

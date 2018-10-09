@@ -54,8 +54,13 @@ public class MainWindowController {
         if(result.isPresent() && result.get() == ButtonType.OK) {
         	
         	AddPropertyWindowController addPropertyController = fxmlLoader.getController();
-            Property newContact = addPropertyController.getNewProperty();
-            DataSource.getInstance().insertProperty(addPropertyController.getProperty_Id().getText(),addPropertyController.getProperty_type().getText());
+//            Property newContact = addPropertyController.getNewProperty();
+            DataSource.getInstance().insertProperty(addPropertyController.getProperty_Id().getText(), 
+            										addPropertyController.getStreet_num().getText(), 
+            										addPropertyController.getStreet_name().getText(), 
+            										addPropertyController.getSuburb().getText(), 
+            										addPropertyController.getProperty_status().getText(), 
+            										addPropertyController.getProperty_type().getText());
             listPropertys();
 //            System.out.println(newContact.getDetails());
         }
