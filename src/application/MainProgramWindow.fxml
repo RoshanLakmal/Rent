@@ -42,6 +42,26 @@
                         <PropertyValueFactory property="property_Id"/>
                     </cellValueFactory>
                 </TableColumn>
+                 <TableColumn text="Street Number">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="street_num"/>
+                    </cellValueFactory>
+                </TableColumn>
+                 <TableColumn text="Street Name">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="street_name"/>
+                    </cellValueFactory>
+                </TableColumn>
+                 <TableColumn text="Suburb">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="suburb"/>
+                    </cellValueFactory>
+                </TableColumn>
+                 <TableColumn text="Property Status">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="property_status"/>
+                    </cellValueFactory>
+                </TableColumn>
                 <TableColumn text="Property Type">
                     <cellValueFactory>
                         <PropertyValueFactory property="property_type"/>

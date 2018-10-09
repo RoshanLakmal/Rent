@@ -100,11 +100,19 @@ public class DataSource {
         	  if(results.getString(COLUMN_PROPERTY_TYPE).equals("APARTMENT")){
         		  newProperty = new Apartment();
         		  newProperty.setProperty_Id(results.getString(COLUMN_PROPERTY_ID));
+        		  newProperty.setStreet_num(results.getString(COLUMN_STREET_NUM));
+        		  newProperty.setStreet_name(results.getString(COLUMN_STREET_NAME));
+        		  newProperty.setSuburb(results.getString(COLUMN_SUBURB));
+        		  newProperty.setProperty_status(results.getString(COLUMN_PROPERTY_STATUS));
         		  newProperty.setProperty_type(results.getString(COLUMN_PROPERTY_TYPE));
 //        		  newProperty = new Apartment(results.getString(COLUMN_PROPERTY_ID),results.getString(COLUMN_PROPERTY_TYPE));
         	  }else if (results.getString(COLUMN_PROPERTY_TYPE).equals("SUIT")){
         		  newProperty = new Suit();
         		  newProperty.setProperty_Id(results.getString(COLUMN_PROPERTY_ID));
+        		  newProperty.setStreet_num(results.getString(COLUMN_STREET_NUM));
+        		  newProperty.setStreet_name(results.getString(COLUMN_STREET_NAME));
+        		  newProperty.setSuburb(results.getString(COLUMN_SUBURB));
+        		  newProperty.setProperty_status(results.getString(COLUMN_PROPERTY_STATUS));
         		  newProperty.setProperty_type(results.getString(COLUMN_PROPERTY_TYPE));  
         	  }
 //        	  

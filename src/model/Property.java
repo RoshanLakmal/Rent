@@ -65,6 +65,38 @@ public abstract class Property {
 	public void setProperty_type(String property_type) {
 		this.property_type.set(property_type);
 	}
+
+	public String getStreet_num() {
+		return street_num.get();
+	}
+
+	public void setStreet_num(String street_num) {
+		this.street_num.set(street_num);;
+	}
+
+	public String getStreet_name() {
+		return street_name.get();
+	}
+
+	public void setStreet_name(String street_name) {
+		this.street_name.set(street_name);;
+	}
+
+	public String getSuburb() {
+		return suburb.get();
+	}
+
+	public void setSuburb(String suburb) {
+		this.suburb.set(suburb);;
+	}
+
+	public String getProperty_status() {
+		return property_status.get();
+	}
+
+	public void setProperty_status(String property_status) {
+		this.property_status.set(property_status);
+	}
 	
 	
 	
