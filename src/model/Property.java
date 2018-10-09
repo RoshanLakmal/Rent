@@ -5,18 +5,22 @@ import javafx.beans.property.SimpleStringProperty;
 public abstract class Property {
 
 		protected SimpleStringProperty property_Id;
-		protected String Street_num;
-		protected String Street_name;
-		protected String Suburb;
+		protected SimpleStringProperty street_num;
+		protected SimpleStringProperty street_name;
+		protected SimpleStringProperty suburb;
 		protected int Num_of_beds;
 		protected SimpleStringProperty property_type;
-		protected String property_status;
+		protected SimpleStringProperty property_status;
 		protected DateTime lastMaintenanceDate;
 		protected RentalRecords[] arr;
 
 		public Property(){
 			this.property_Id = new SimpleStringProperty();
+			this.street_num = new SimpleStringProperty();
+			this.street_name = new SimpleStringProperty();
+			this.suburb = new SimpleStringProperty();
 			this.property_type = new SimpleStringProperty();
+			this.property_status = new SimpleStringProperty();
 		}
 
 //public Property(String property_Id, String Street_num, String Street_name, String Suburb, int Num_of_beds, String property_type, String property_status, DateTime lastMaintenanceDate)

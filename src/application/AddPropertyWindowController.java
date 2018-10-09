@@ -10,10 +10,20 @@ public class AddPropertyWindowController {
 	@FXML
     private TextField property_Id;
 
+	@FXML
+    private TextField street_num;
+	
+	@FXML
+    private TextField street_name;
+	
+	@FXML
+    private TextField suburb;
+	
     @FXML
     private TextField property_type;
     
-    
+    @FXML
+    private TextField property_status;
     
     public TextField getProperty_Id() {
 		return property_Id;
