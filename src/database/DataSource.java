@@ -25,6 +25,8 @@ public class DataSource {
 	 public static final String COLUMN_SUBURB = "suburb";
 	 public static final String COLUMN_PROPERTY_STATUS = "property_status";
 	 public static final String COLUMN_PROPERTY_TYPE = "property_type";
+	 
+	 
 	
 	 public static final String CREATE_PROPERTY_TABLE = "CREATE TABLE IF NOT EXISTS RENTAL_PROPERTY" +
 			 "(property_Id VARCHAR(255) not NULL, " +

@@ -1,9 +1,9 @@
 package model;
 public class RentalRecords {
 
-	 String Record_Id;
-	 String Customer_Id;
-	 DateTime RentDate;
+	String Record_Id;
+	String Customer_Id;
+	DateTime RentDate;
 	DateTime Estimated_Return_Date;
 	DateTime Actual_Return_Date;
 	double RentalFee;

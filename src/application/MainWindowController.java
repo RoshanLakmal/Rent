@@ -3,17 +3,23 @@ package application;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import database.DataSource;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import model.*;
 
 public class MainWindowController {
@@ -24,11 +30,46 @@ public class MainWindowController {
 	@FXML
 	private TableView propertyTable;
 	
+    private DataSource data;
+	
 	public void listPropertys(){
 		Task<ObservableList<Property>> task = new GetAllPropertyTask();
 		propertyTable.itemsProperty().bind(task.valueProperty());
 		new Thread(task).start();
 	}
+	
+	
+	 public void initialize() {
+//	        data = new DataSource();
+//	        data.loadContacts();
+//	        contactsTable.setItems(data.getContacts());
+		 propertyTable.setOnMouseClicked(new EventHandler<MouseEvent>(){
+	        	@Override
+	        	public void handle(MouseEvent event){
+//	        		System.out.println("Hi");
+	        		FXMLLoader Loader = new FXMLLoader();
+	        		Loader.setLocation(getClass().getResource("PropertyDetailWindow.fxml"));
+	               try{
+	            	   Loader.load();
+	               }catch (IOException ex){
+	            	   Logger.getLogger(PropertyDetailWindow.class.getName()).log(Level.SEVERE,null,ex);
+	               }
+	               PropertyDetailWindow myController = Loader.getController();
+//	               if(propertyTable.getSelectionModel().getSelectedItem().getClass() instanceof Apartment){
+//	            	   
+//	               }else{
+//	            	   
+//	               }
+//	               instanceof
+	               final Property myProperty = (Property)propertyTable.getSelectionModel().getSelectedItem();
+	               myController.setData(myProperty.getProperty_Id());
+	               Stage stage = new Stage();
+	               stage.setScene(new Scene(Loader.getRoot(), 600, 400));
+	               stage.show();
+//	               System.out.println("clicked"+contactsTable.getSelectionModel().getSelectedItem().getFirstName());
+	        	}
+	        });
+	    }
 	
 	@FXML
     public void showAddContactDialog() throws SQLException {

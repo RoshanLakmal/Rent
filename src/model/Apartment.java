@@ -3,6 +3,7 @@ package model;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Apartment extends Property {
+	
     private int numRec = 0;
 	double rent = 0;
 	
