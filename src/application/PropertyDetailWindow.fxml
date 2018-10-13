@@ -7,6 +7,10 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PropertyDetailWindow">
    <children>
       <Text fx:id="mytext" layoutX="286.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Button fx:id="bclose" layoutX="82.0" layoutY="72.0" mnemonicParsing="false" onAction="#ok" text="Button" />
+      <Button fx:id="bclose" layoutX="37.0" layoutY="37.0" mnemonicParsing="false" onAction="#ok" text="Back" />
+      <Button layoutX="37.0" layoutY="93.0" mnemonicParsing="false" text="Rent" />
+      <Button layoutX="122.0" layoutY="93.0" mnemonicParsing="false" text="Return" />
+      <Button layoutX="221.0" layoutY="93.0" mnemonicParsing="false" text="Maintaince" />
+      <Button layoutX="346.0" layoutY="93.0" mnemonicParsing="false" text="Complete Maintaince" />
    </children>
 </AnchorPane>
