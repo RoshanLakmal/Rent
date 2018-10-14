@@ -1,5 +1,8 @@
 package model;
 
+import java.sql.SQLException;
+
+import database.DataSource;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Apartment extends Property {
@@ -17,7 +20,7 @@ public class Apartment extends Property {
 //	
 //	}
 
-	public boolean rent(String customerID, DateTime rentDate, int numOfRentDay)  //Renting an apartment
+	public boolean rent(String customerID, DateTime rentDate, int numOfRentDay) //Renting an apartment
 	{     
 		boolean temp = true;
 		
@@ -38,19 +41,37 @@ public class Apartment extends Property {
 		
 		if(temp)
 		{
+			try {
+				String myRecord_Id = this.getProperty_Id().toString()+"_"+customerID+"_"+rentDate.getEightDigitDate();
+				DateTime esreturnday = new DateTime(rentDate,numOfRentDay);
+				
 			RentalRecords records= new RentalRecords();
+
 			records.setRecord_Id(this.property_Id+"_"+customerID+"_"+rentDate.getEightDigitDate());	
 
-			DateTime esreturnday = new DateTime(rentDate,numOfRentDay);
+			
 			
 			records.setRentDate(rentDate);
 			
 			records.setEstimated_Return_Date(esreturnday);
 			
+          
+			DataSource.getInstance().insertRentalRecord(this.getProperty_Id(), myRecord_Id, customerID, rentDate, 
+					  esreturnday,
+					  new DateTime(00,00,0000), 
+				  0,
+				  0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+			
 //			System.arraycopy(this.arr, 0, this.arr, 1, 9);
 //			this.arr[0]=records;
 			
 //			this.property_status="Rented";
+          //update to rental table
 			this.setProperty_status("Rented");
 			
 //			if (numRec<10) {
@@ -69,6 +90,16 @@ public class Apartment extends Property {
 		
 	}
 	
+	private DateTime stringToDateTime(String sDateTime){
+		  String string = sDateTime;
+		  String[] parts = string.split("/");
+		  int day = Integer.parseInt(parts[0]);
+		  int month = Integer.parseInt(parts[1]);
+		  int year = Integer.parseInt(parts[2]);
+		  
+		  DateTime t = new DateTime(day,month,year);
+		  return t;
+	  }
 	
 	
 	

@@ -12,19 +12,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.DateTime;
+import model.Property;
 
 public class PropertyDetailWindow {
 	
 	@FXML
     private AnchorPane propertyDetailPanel;
 	
+//	@FXML
+//	private TableView rentalTable;
+	
 	@FXML
-	private TableView rentalTable;
+	private TextArea record;
 	
 	@FXML
 	private Text mytext;
@@ -36,7 +41,15 @@ public class PropertyDetailWindow {
 	private Button brent;
 	
 	public void initialize() {
+		String text="";
+		System.out.println(DataSource.getInstance().getRentalRecords().size());
+		for(int i=0;i<DataSource.getInstance().getRentalRecords().size();i++){
+//			System.out.println(DataSource.getInstance().getRentalRecords().get(i).getCustomer_Id());
+			text += DataSource.getInstance().getRentalRecords().get(i).getDetails();
+			
+		 }
 		
+		record.setText(text);
 	}
 	
 	public void setData(String firstName){
@@ -77,16 +90,21 @@ public class PropertyDetailWindow {
         	DateTime t = stringToDateTime(addRentalController.getRentDate().getText());
         	int days = Integer.parseInt(addRentalController.getNumOfRentDay().getText());
         	
+        	Property test = DataSource.getInstance().getProperty(mytext.getText());
+        	String propertyId = mytext.getText();
+//        	System.out.println(test.getStreet_name()+test.getProperty_type());
         	
+        	boolean rented = test.rent(customerID,t, days);
+//        	initialize();
         	
-        	for(int i=0;i<DataSource.getInstance().queryArtists().size();i++){
-        		if(mytext.equals(DataSource.getInstance().queryArtists().get(i).getProperty_Id())){
-        			boolean rented = DataSource.getInstance().queryArtists().get(i).rent(customerID,t, days);
-        		}
-        		
-//        		boolean rented = myProperty[i].rent(customerID,t, days);
-//   			 System.out.println(DataSource.getInstance().queryArtists().get(i).getProperty_Id());
-   		 }
+//        	for(int i=0;i<DataSource.getInstance().queryArtists().size();i++){
+//        		if(mytext.equals(DataSource.getInstance().queryArtists().get(i).getProperty_Id())){
+//        			boolean rented = DataSource.getInstance().queryArtists().get(i).rent(customerID,t, days);
+//        		}
+//        		
+////        		boolean rented = myProperty[i].rent(customerID,t, days);
+////   			 System.out.println(DataSource.getInstance().queryArtists().get(i).getProperty_Id());
+//   		 }
         	
         	
 //        	System.out.println(addRentalController.getCustomer_Id().getText());
@@ -94,16 +112,16 @@ public class PropertyDetailWindow {
 //        	System.out.println(addRentalController.getNumOfRentDay().getText());
         	
         	
-        	AddRentalRecordController addRentalRecordController = fxmlLoader.getController();
-//          Property newContact = addPropertyController.getNewProperty();
-          DataSource.getInstance().insertProperty(addRentalRecordController.getProperty_Id().getText(), 
-								        		  addRentalRecordController.getStreet_num().getText(), 
-								        		  addRentalRecordController.getStreet_name().getText(), 
-								        		  addRentalRecordController.getSuburb().getText(),
-          										  Integer.parseInt(addRentalRecordController.getNum_of_beds().getText()),
-          										  addRentalRecordController.getProperty_status().getText(), 
-          										  addRentalRecordController.getProperty_type().getText(),
-          										  stringToDateTime(addRentalRecordController.getLastMaintenanceDate().getText()));
+//        	AddRentalRecordController addRentalRecordController = fxmlLoader.getController();
+////          Property newContact = addPropertyController.getNewProperty();
+//          DataSource.getInstance().insertProperty(addRentalRecordController.getProperty_Id().getText(), 
+//								        		  addRentalRecordController.getStreet_num().getText(), 
+//								        		  addRentalRecordController.getStreet_name().getText(), 
+//								        		  addRentalRecordController.getSuburb().getText(),
+//          										  Integer.parseInt(addRentalRecordController.getNum_of_beds().getText()),
+//          										  addRentalRecordController.getProperty_status().getText(), 
+//          										  addRentalRecordController.getProperty_type().getText(),
+//          										  stringToDateTime(addRentalRecordController.getLastMaintenanceDate().getText()));
         }
 	}
 	

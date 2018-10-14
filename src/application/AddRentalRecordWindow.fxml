@@ -18,8 +18,6 @@
             <Label text="Number of Days" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
             <TextField fx:id="numOfRentDay" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
             
-      
-            
         </GridPane>
     </content>
 </DialogPane>

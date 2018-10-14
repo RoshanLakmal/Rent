@@ -16,12 +16,13 @@ public class RentalRecords {
 	
 	public RentalRecords()
 	{
-		this.Record_Id = null;
-		this.RentDate = null;
-		this.Estimated_Return_Date = null;
-		this.Actual_Return_Date = null;
-		this.RentalFee = null;
-		this.Late_Fee = null;
+		this.Record_Id = new SimpleStringProperty();
+		this.Customer_Id = new SimpleStringProperty();
+		this.RentDate = new SimpleObjectProperty<>();
+		this.Estimated_Return_Date = new SimpleObjectProperty<>();
+		this.Actual_Return_Date = new SimpleObjectProperty<>();
+		this.RentalFee = new SimpleDoubleProperty();
+		this.Late_Fee = new SimpleDoubleProperty();
 		
 	}
 	

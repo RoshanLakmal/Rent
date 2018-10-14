@@ -90,7 +90,7 @@ public class DataSource {
 	            	+ COLUMN_RENTALFEE + ", " 
 	            	+ COLUMN_LATE_FEE +") VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 	 
-	 public static final String QUERY_PROPERTY_ID = "SELECT " + COLUMN_PROPERTY_ID + " FROM " +
+	 public static final String QUERY_PROPERTY_ID = "SELECT * FROM " +
 			 TABLE_PROPERTY + " WHERE " + COLUMN_PROPERTY_ID + " = ?";
 	 
 	 public static final String QUERY_RECORD_ID = "SELECT " + COLUMN_RECORD_ID + " FROM " +
@@ -100,6 +100,7 @@ public class DataSource {
   
   private PreparedStatement insertProperty;
   private PreparedStatement insertRentalRecord;
+  private PreparedStatement quaryProperty;
 
   private static DataSource instance = new DataSource();
   
@@ -115,6 +116,7 @@ public class DataSource {
           statement.executeUpdate(CREATE_RENTAL_RECORD_TABLE); 
           insertProperty = conn.prepareStatement(INSERT_PROPERTY, Statement.RETURN_GENERATED_KEYS);
           insertRentalRecord = conn.prepareStatement(INSERT_RENTAL_RECORD, Statement.RETURN_GENERATED_KEYS);
+          quaryProperty = conn.prepareStatement(QUERY_PROPERTY_ID);
           return true;
       } catch(SQLException e) {
           System.out.println("Couldn't connect to database: " + e.getMessage());
@@ -135,10 +137,57 @@ public class DataSource {
           if(insertRentalRecord != null) {
         	  insertRentalRecord.close();
           }
+          
+          if(quaryProperty != null) {
+        	  quaryProperty.close();
+          }
       } catch(SQLException e) {
           System.out.println("Couldn't close connection: " + e.getMessage());
       }
   }
+  
+  public Property getProperty(String id) throws SQLException {
+
+	  quaryProperty.setString(1, id);
+      ResultSet results = quaryProperty.executeQuery();
+      Property newProperty = null;
+      
+      if(results.next()) {
+//    	  Property newProperty = new Apartment();
+//		  newProperty.setProperty_Id(results.getString(COLUMN_PROPERTY_ID));
+//		  newProperty.setProperty_type(results.getString(COLUMN_PROPERTY_TYPE));
+    	  
+    	  if(results.getString(COLUMN_PROPERTY_TYPE).equals("APARTMENT")){
+    		  newProperty = new Apartment();
+    		  newProperty.setProperty_Id(results.getString(COLUMN_PROPERTY_ID));
+    		  newProperty.setStreet_num(results.getString(COLUMN_STREET_NUM));
+    		  newProperty.setStreet_name(results.getString(COLUMN_STREET_NAME));
+    		  newProperty.setSuburb(results.getString(COLUMN_SUBURB));
+    		  newProperty.setNum_of_beds(results.getInt(COLUMN_NUM_OF_BEDS));
+    		  newProperty.setProperty_status(results.getString(COLUMN_PROPERTY_STATUS));
+    		  newProperty.setProperty_type(results.getString(COLUMN_PROPERTY_TYPE));
+    		  newProperty.setLastMaintenanceDate(stringToDateTime(results.getString(COLUMN_LASTMAINTENANCEDATE)));
+//    		  newProperty = new Apartment(results.getString(COLUMN_PROPERTY_ID),results.getString(COLUMN_PROPERTY_TYPE));
+    	  }else if (results.getString(COLUMN_PROPERTY_TYPE).equals("SUIT")){
+    		  newProperty = new Suit();
+    		  newProperty.setProperty_Id(results.getString(COLUMN_PROPERTY_ID));
+    		  newProperty.setStreet_num(results.getString(COLUMN_STREET_NUM));
+    		  newProperty.setStreet_name(results.getString(COLUMN_STREET_NAME));
+    		  newProperty.setSuburb(results.getString(COLUMN_SUBURB));
+    		  newProperty.setNum_of_beds(results.getInt(COLUMN_NUM_OF_BEDS));
+    		  newProperty.setProperty_status(results.getString(COLUMN_PROPERTY_STATUS));
+    		  newProperty.setProperty_type(results.getString(COLUMN_PROPERTY_TYPE));  
+    		  newProperty.setLastMaintenanceDate(stringToDateTime(results.getString(COLUMN_LASTMAINTENANCEDATE)));
+    	  }
+      }
+      return newProperty;
+//      else{
+//              throw new SQLException("Couldn't get _id for artist");
+//          }
+      }
+  
+  
+  
   
   public List<Property> queryArtists() {
 
@@ -203,6 +252,38 @@ public class DataSource {
       }
 
   }
+  
+  public List<RentalRecords> getRentalRecords() {
+	  
+      try(Statement statement = conn.createStatement();
+          ResultSet results = statement.executeQuery("SELECT * FROM " + TABLE_RENTAL_RECORD)) {
+
+          List<RentalRecords> rentalRec = new ArrayList<>();
+     
+          
+          while(results.next()) {
+        	  RentalRecords rentalRecord = new RentalRecords();
+        	  rentalRecord.setRecord_Id( results.getString(COLUMN_RECORD_ID));
+        	  rentalRecord.setCustomer_Id(results.getString(COLUMN_CUSTOMER_ID));
+        	  rentalRecord.setRentDate(stringToDateTime(results.getString(COLUMN_RENTDATE)));
+        	  rentalRecord.setEstimated_Return_Date(stringToDateTime(results.getString(COLUMN_ESTIMATED_RETURN_DATE)));
+        	  rentalRecord.setActual_Return_Date(stringToDateTime(results.getString(COLUMN_ACTUAL_RETURN_DATE)));
+        	  rentalRecord.setRentalFee(results.getDouble(COLUMN_LATE_FEE));
+        	  rentalRecord.setLate_Fee(results.getDouble(COLUMN_RENTALFEE));
+        	  
+        	  rentalRec.add(rentalRecord);
+       }
+
+          return rentalRec;
+          
+          
+
+  } catch(SQLException e) {
+      System.out.println("Query failed: " + e.getMessage());
+      return null;
+  }
+  }
+
   
   private DateTime stringToDateTime(String sDateTime){
 	  String string = sDateTime;
