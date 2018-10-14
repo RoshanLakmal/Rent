@@ -1,13 +1,18 @@
 package model;
+
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class RentalRecords {
 
-	String Record_Id;
-	String Customer_Id;
-	DateTime RentDate;
-	DateTime Estimated_Return_Date;
-	DateTime Actual_Return_Date;
-	double RentalFee;
-	double Late_Fee;
+	SimpleStringProperty Record_Id;
+	SimpleStringProperty Customer_Id;
+	SimpleObjectProperty<DateTime> RentDate;
+	SimpleObjectProperty<DateTime> Estimated_Return_Date;
+	SimpleObjectProperty<DateTime> Actual_Return_Date;
+	SimpleDoubleProperty RentalFee;
+	SimpleDoubleProperty Late_Fee;
 	
 	public RentalRecords()
 	{
@@ -15,8 +20,8 @@ public class RentalRecords {
 		this.RentDate = null;
 		this.Estimated_Return_Date = null;
 		this.Actual_Return_Date = null;
-		this.RentalFee = 0;
-		this.Late_Fee = 0;
+		this.RentalFee = null;
+		this.Late_Fee = null;
 		
 	}
 	
@@ -32,7 +37,7 @@ public class RentalRecords {
 //		this.Late_Fee = Late_Fee;
 //    }
 	
-  
+	
 	
 	public String toString()
 	{
@@ -43,6 +48,62 @@ public class RentalRecords {
 		return test;
 	}
 	
+	public String getRecord_Id() {
+		return Record_Id.get();
+	}
+
+	public void setRecord_Id(String record_Id) {
+		Record_Id.set(record_Id);
+	}
+
+	public String getCustomer_Id() {
+		return Customer_Id.get();
+	}
+
+	public void setCustomer_Id(String customer_Id) {
+		Customer_Id.set(customer_Id);
+	}
+
+	public DateTime getRentDate() {
+		return RentDate.get();
+	}
+
+	public void setRentDate(DateTime rentDate) {
+		RentDate.set(rentDate);
+	}
+
+	public DateTime getEstimated_Return_Date() {
+		return Estimated_Return_Date.get();
+	}
+
+	public void setEstimated_Return_Date(DateTime estimated_Return_Date) {
+		Estimated_Return_Date.set(estimated_Return_Date);
+	}
+
+	public DateTime getActual_Return_Date() {
+		return Actual_Return_Date.get();
+	}
+
+	public void setActual_Return_Date(DateTime actual_Return_Date) {
+		Actual_Return_Date.set(actual_Return_Date);
+	}
+
+	public double getRentalFee() {
+		return RentalFee.get();
+	}
+
+	public void setRentalFee(double rentalFee) {
+		RentalFee.set(rentalFee);
+	}
+
+	public double getLate_Fee() {
+		return Late_Fee.get();
+	}
+
+	public void setLate_Fee(double late_Fee) {
+		Late_Fee.set(late_Fee);
+	}
+
 	public String getDetails()  //getting all the rental records of each property
 	{
 		String test = "";

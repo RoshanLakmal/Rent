@@ -32,16 +32,15 @@ public class DataSource {
 	 public static final String COLUMN_PROPERTY_TYPE = "property_type";
 	 public static final String COLUMN_LASTMAINTENANCEDATE = "lastMaintenanceDate";
 	 
-//	 public static final String TABLE_RENTAL_RECORD = "RENTAL_RECORD";
+	 public static final String TABLE_RENTAL_RECORD = "RENTAL_RECORD";
 //	 public static final String COLUMN_RENTAL_RECORD_PROPERTY_ID = "property_Id_record_Id";
-//	 
-//	 public static final String COLUMN_RECORD_ID = "Record_Id";
-//	 public static final String COLUMN_CUSTOMER_ID = "Customer_Id";
-//	 public static final String COLUMN_RENTDATE= "RentDate";
-//	 public static final String COLUMN_ESTIMATED_RETURN_DATE = "Estimated_Return_Date";
-//	 public static final String COLUMN_ACTUAL_RETURN_DATE = "Actual_Return_Date";
-//	 public static final String COLUMN_RENTALFEE = "RentalFee";
-//	 public static final String COLUMN_LATE_FEE = "Late_Fee";
+	 public static final String COLUMN_RECORD_ID = "Record_Id";
+	 public static final String COLUMN_CUSTOMER_ID = "Customer_Id";
+	 public static final String COLUMN_RENTDATE= "RentDate";
+	 public static final String COLUMN_ESTIMATED_RETURN_DATE = "Estimated_Return_Date";
+	 public static final String COLUMN_ACTUAL_RETURN_DATE = "Actual_Return_Date";
+	 public static final String COLUMN_RENTALFEE = "RentalFee";
+	 public static final String COLUMN_LATE_FEE = "Late_Fee";
 	
 	 public static final String CREATE_PROPERTY_TABLE = "CREATE TABLE IF NOT EXISTS RENTAL_PROPERTY" +
 			 "(property_Id VARCHAR(255) not NULL, " +
@@ -54,14 +53,16 @@ public class DataSource {
              " lastMaintenanceDate VARCHAR(255), " +
              " PRIMARY KEY ( property_Id ))"; 
 	 
-//	 public static final String CREATE_RENTAL_RECORD_TABLE = "CREATE TABLE IF NOT EXISTS RENTAL_RECORD" +
-//			 "(Record_Id VARCHAR(255) not NULL, " +
-//             " property_Id_record_Id VARCHAR(255), " + 
-//             " street_name VARCHAR(255), " + 
-//             " suburb VARCHAR(255), " +
-//             " property_status VARCHAR(255), " +
-//             " property_type VARCHAR(255), " +
-//             " PRIMARY KEY ( property_Id ))"; 
+	 public static final String CREATE_RENTAL_RECORD_TABLE = "CREATE TABLE IF NOT EXISTS RENTAL_RECORD" +
+			 "(Record_Id VARCHAR(255) not NULL, " +
+             " property_Id VARCHAR(255), " + 
+             " Customer_Id VARCHAR(255), " + 
+             " RentDate VARCHAR(255), " +
+             " Estimated_Return_Date VARCHAR(255), " +
+             " Actual_Return_Date VARCHAR(255), " +
+             " RentalFee DOUBLE, " +
+             " Late_Fee DOUBLE, " +
+             " PRIMARY KEY ( Record_Id ), FOREIGN KEY (property_Id))"; 
 	 
 //	 public static final String CREATE_PROPERTY_TABLEE = "CREATE TABLE IF NOT EXISTS warehouses (\n"
 //             + "	id integer PRIMARY KEY,\n"
@@ -79,12 +80,26 @@ public class DataSource {
 	            	+ COLUMN_PROPERTY_TYPE + ", "
 	            	+ COLUMN_LASTMAINTENANCEDATE +") VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 	 
+	 public static final String INSERT_RENTAL_RECORD = "INSERT INTO " + TABLE_RENTAL_RECORD +
+	            '(' + COLUMN_PROPERTY_ID + ", "
+	            	+ COLUMN_RECORD_ID + ", " 
+	            	+ COLUMN_CUSTOMER_ID + ", " 
+	            	+ COLUMN_RENTDATE + ", " 
+	            	+ COLUMN_ESTIMATED_RETURN_DATE + ", "
+	            	+ COLUMN_ACTUAL_RETURN_DATE + ", " 
+	            	+ COLUMN_RENTALFEE + ", " 
+	            	+ COLUMN_LATE_FEE +") VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+	 
 	 public static final String QUERY_PROPERTY_ID = "SELECT " + COLUMN_PROPERTY_ID + " FROM " +
 			 TABLE_PROPERTY + " WHERE " + COLUMN_PROPERTY_ID + " = ?";
+	 
+	 public static final String QUERY_RECORD_ID = "SELECT " + COLUMN_RECORD_ID + " FROM " +
+			 TABLE_RENTAL_RECORD + " WHERE " + COLUMN_RECORD_ID + " = ?";
 
   private Connection conn;
   
   private PreparedStatement insertProperty;
+  private PreparedStatement insertRentalRecord;
 
   private static DataSource instance = new DataSource();
   
@@ -98,6 +113,7 @@ public class DataSource {
           Statement statement = conn.createStatement();
           statement.executeUpdate(CREATE_PROPERTY_TABLE); 
           insertProperty = conn.prepareStatement(INSERT_PROPERTY, Statement.RETURN_GENERATED_KEYS);
+          insertRentalRecord = conn.prepareStatement(INSERT_RENTAL_RECORD, Statement.RETURN_GENERATED_KEYS);
           return true;
       } catch(SQLException e) {
           System.out.println("Couldn't connect to database: " + e.getMessage());
@@ -113,6 +129,10 @@ public class DataSource {
           
           if(insertProperty != null) {
         	  insertProperty.close();
+          }
+          
+          if(insertRentalRecord != null) {
+        	  insertRentalRecord.close();
           }
       } catch(SQLException e) {
           System.out.println("Couldn't close connection: " + e.getMessage());
@@ -224,4 +244,35 @@ public class DataSource {
           }
 //      }
   }
+  
+  public int insertRentalRecord(String propertyId, String streetNum, String streetName, String suburb, int numOfBeds, String propertyStatus, String propertyType, DateTime lastMaintenanceDate) throws SQLException {
+
+//    queryAlbum.setString(1, name);
+//    ResultSet results = queryAlbum.executeQuery();
+//    if(results.next()) {
+//        return results.getInt(1);
+//    } else {
+        // Insert the album
+	  insertRentalRecord.setString(1, propertyId);
+	  insertRentalRecord.setString(2, streetNum);
+	  insertRentalRecord.setString(3, streetName);
+	  insertRentalRecord.setString(4, suburb);
+	  insertRentalRecord.setInt(5, numOfBeds);
+	  insertRentalRecord.setString(6, propertyStatus);
+	  insertRentalRecord.setString(7, propertyType);
+	  insertRentalRecord.setString(8, lastMaintenanceDate.getFormattedDate());
+        int affectedRows = insertProperty.executeUpdate();
+
+        if(affectedRows != 1) {
+            throw new SQLException("Couldn't insert album!");
+        }
+
+        ResultSet generatedKeys = insertProperty.getGeneratedKeys();
+        if(generatedKeys.next()) {
+            return generatedKeys.getInt(1);
+        } else {
+            throw new SQLException("Couldn't get _id for album");
+        }
+//    }
+}
 }
