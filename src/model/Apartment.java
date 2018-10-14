@@ -39,24 +39,28 @@ public class Apartment extends Property {
 		if(temp)
 		{
 			RentalRecords records= new RentalRecords();
-			records.Record_Id =this.property_Id+"_"+customerID+"_"+rentDate.getEightDigitDate();	
+			records.setRecord_Id(this.property_Id+"_"+customerID+"_"+rentDate.getEightDigitDate());	
 
 			DateTime esreturnday = new DateTime(rentDate,numOfRentDay);
 			
-			records.RentDate = rentDate;
-			records.Estimated_Return_Date = esreturnday;
+			records.setRentDate(rentDate);
 			
-			System.arraycopy(this.arr, 0, this.arr, 1, 9);
-			this.arr[0]=records;
-			this.property_status="Rented";
-			if (numRec<10) {
-				numRec++;
-			}
+			records.setEstimated_Return_Date(esreturnday);
+			
+//			System.arraycopy(this.arr, 0, this.arr, 1, 9);
+//			this.arr[0]=records;
+			
+//			this.property_status="Rented";
+			this.setProperty_status("Rented");
+			
+//			if (numRec<10) {
+//				numRec++;
+//			}
 		}
 		
-		else if(numOfRentDay<1){
-			temp = false;
-		}
+//		else if(numOfRentDay<1){
+//			temp = false;
+//		}
 		
 		return temp;
 

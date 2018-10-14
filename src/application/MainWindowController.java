@@ -41,6 +41,10 @@ public class MainWindowController {
 	
 	
 	 public void initialize() {
+		 for(int i=0;i<DataSource.getInstance().queryArtists().size();i++){
+			 System.out.println(DataSource.getInstance().queryArtists().get(i).getProperty_Id());
+		 }
+		 
 //	        data = new DataSource();
 //	        data.loadContacts();
 //	        contactsTable.setItems(data.getContacts());

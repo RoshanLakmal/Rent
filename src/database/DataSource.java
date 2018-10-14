@@ -62,7 +62,7 @@ public class DataSource {
              " Actual_Return_Date VARCHAR(255), " +
              " RentalFee DOUBLE, " +
              " Late_Fee DOUBLE, " +
-             " PRIMARY KEY ( Record_Id ), FOREIGN KEY (property_Id))"; 
+             " PRIMARY KEY ( Record_Id ))"; 
 	 
 //	 public static final String CREATE_PROPERTY_TABLEE = "CREATE TABLE IF NOT EXISTS warehouses (\n"
 //             + "	id integer PRIMARY KEY,\n"
@@ -112,6 +112,7 @@ public class DataSource {
           conn = DriverManager.getConnection(CONNECTION_STRING);
           Statement statement = conn.createStatement();
           statement.executeUpdate(CREATE_PROPERTY_TABLE); 
+          statement.executeUpdate(CREATE_RENTAL_RECORD_TABLE); 
           insertProperty = conn.prepareStatement(INSERT_PROPERTY, Statement.RETURN_GENERATED_KEYS);
           insertRentalRecord = conn.prepareStatement(INSERT_RENTAL_RECORD, Statement.RETURN_GENERATED_KEYS);
           return true;
@@ -245,7 +246,7 @@ public class DataSource {
 //      }
   }
   
-  public int insertRentalRecord(String propertyId, String streetNum, String streetName, String suburb, int numOfBeds, String propertyStatus, String propertyType, DateTime lastMaintenanceDate) throws SQLException {
+  public int insertRentalRecord(String propertyId, String Record_Id, String Customer_Id, DateTime RentDate, DateTime Estimated_Return_Date, DateTime Actual_Return_Date, double RentalFee, double Late_Fee) throws SQLException {
 
 //    queryAlbum.setString(1, name);
 //    ResultSet results = queryAlbum.executeQuery();
@@ -254,20 +255,20 @@ public class DataSource {
 //    } else {
         // Insert the album
 	  insertRentalRecord.setString(1, propertyId);
-	  insertRentalRecord.setString(2, streetNum);
-	  insertRentalRecord.setString(3, streetName);
-	  insertRentalRecord.setString(4, suburb);
-	  insertRentalRecord.setInt(5, numOfBeds);
-	  insertRentalRecord.setString(6, propertyStatus);
-	  insertRentalRecord.setString(7, propertyType);
-	  insertRentalRecord.setString(8, lastMaintenanceDate.getFormattedDate());
-        int affectedRows = insertProperty.executeUpdate();
+	  insertRentalRecord.setString(2, Record_Id);
+	  insertRentalRecord.setString(3, Customer_Id);
+	  insertRentalRecord.setString(4, RentDate.getFormattedDate());
+	  insertRentalRecord.setString(5, Estimated_Return_Date.getFormattedDate());
+	  insertRentalRecord.setString(6, Actual_Return_Date.getFormattedDate());
+	  insertRentalRecord.setDouble(7, RentalFee);
+	  insertRentalRecord.setDouble(8, Late_Fee);
+        int affectedRows = insertRentalRecord.executeUpdate();
 
         if(affectedRows != 1) {
             throw new SQLException("Couldn't insert album!");
         }
 
-        ResultSet generatedKeys = insertProperty.getGeneratedKeys();
+        ResultSet generatedKeys = insertRentalRecord.getGeneratedKeys();
         if(generatedKeys.next()) {
             return generatedKeys.getInt(1);
         } else {
