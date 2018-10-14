@@ -23,8 +23,10 @@ public class DataSource {
 	 public static final String COLUMN_STREET_NUM = "street_num";
 	 public static final String COLUMN_STREET_NAME = "street_name";
 	 public static final String COLUMN_SUBURB = "suburb";
+	 public static final String COLUMN_NUM_OF_BEDS = "num_of_beds";
 	 public static final String COLUMN_PROPERTY_STATUS = "property_status";
 	 public static final String COLUMN_PROPERTY_TYPE = "property_type";
+	 public static final String COLUMN_LASTMAINTENANCEDATE = "lastMaintenanceDate";
 	 
 //	 public static final String TABLE_RENTAL_RECORD = "RENTAL_RECORD";
 //	 public static final String COLUMN_RENTAL_RECORD_PROPERTY_ID = "property_Id_record_Id";
@@ -42,8 +44,10 @@ public class DataSource {
              " street_num VARCHAR(255), " + 
              " street_name VARCHAR(255), " + 
              " suburb VARCHAR(255), " +
+             " num_of_beds INT, " +
              " property_status VARCHAR(255), " +
              " property_type VARCHAR(255), " +
+             " lastMaintenanceDate VARCHAR(255), " +
              " PRIMARY KEY ( property_Id ))"; 
 	 
 //	 public static final String CREATE_RENTAL_RECORD_TABLE = "CREATE TABLE IF NOT EXISTS RENTAL_RECORD" +
@@ -62,7 +66,13 @@ public class DataSource {
 //             + ");";
 	 
 	 public static final String INSERT_PROPERTY = "INSERT INTO " + TABLE_PROPERTY +
-	            '(' + COLUMN_PROPERTY_ID + ", " + COLUMN_STREET_NUM + ", " + COLUMN_STREET_NAME + ", " + COLUMN_SUBURB + ", " + COLUMN_PROPERTY_STATUS + ", " + COLUMN_PROPERTY_TYPE + ") VALUES(?, ?, ?, ?, ?, ?)";
+	            '(' + COLUMN_PROPERTY_ID + ", "
+	            	+ COLUMN_STREET_NUM + ", " 
+	            	+ COLUMN_STREET_NAME + ", " 
+	            	+ COLUMN_SUBURB + ", "
+	            	+ COLUMN_NUM_OF_BEDS + ", " 
+	            	+ COLUMN_PROPERTY_STATUS + ", " 
+	            	+ COLUMN_PROPERTY_TYPE + ") VALUES(?, ?, ?, ?, ?, ?, ?)";
 	 
 	 public static final String QUERY_PROPERTY_ID = "SELECT " + COLUMN_PROPERTY_ID + " FROM " +
 			 TABLE_PROPERTY + " WHERE " + COLUMN_PROPERTY_ID + " = ?";
@@ -123,6 +133,7 @@ public class DataSource {
         		  newProperty.setStreet_num(results.getString(COLUMN_STREET_NUM));
         		  newProperty.setStreet_name(results.getString(COLUMN_STREET_NAME));
         		  newProperty.setSuburb(results.getString(COLUMN_SUBURB));
+        		  newProperty.setNum_of_beds(results.getInt(COLUMN_NUM_OF_BEDS));
         		  newProperty.setProperty_status(results.getString(COLUMN_PROPERTY_STATUS));
         		  newProperty.setProperty_type(results.getString(COLUMN_PROPERTY_TYPE));
 //        		  newProperty = new Apartment(results.getString(COLUMN_PROPERTY_ID),results.getString(COLUMN_PROPERTY_TYPE));
@@ -132,6 +143,7 @@ public class DataSource {
         		  newProperty.setStreet_num(results.getString(COLUMN_STREET_NUM));
         		  newProperty.setStreet_name(results.getString(COLUMN_STREET_NAME));
         		  newProperty.setSuburb(results.getString(COLUMN_SUBURB));
+        		  newProperty.setNum_of_beds(results.getInt(COLUMN_NUM_OF_BEDS));
         		  newProperty.setProperty_status(results.getString(COLUMN_PROPERTY_STATUS));
         		  newProperty.setProperty_type(results.getString(COLUMN_PROPERTY_TYPE));  
         	  }
@@ -155,7 +167,7 @@ public class DataSource {
 
   }
   
-  public int insertProperty(String propertyId, String streetNum, String streetName, String suburb, String propertyStatus, String propertyType) throws SQLException {
+  public int insertProperty(String propertyId, String streetNum, String streetName, String suburb, int numOfBeds, String propertyStatus, String propertyType) throws SQLException {
 
 //      queryAlbum.setString(1, name);
 //      ResultSet results = queryAlbum.executeQuery();
@@ -167,8 +179,9 @@ public class DataSource {
 	  insertProperty.setString(2, streetNum);
 	  insertProperty.setString(3, streetName);
 	  insertProperty.setString(4, suburb);
-	  insertProperty.setString(5, propertyStatus);
-	  insertProperty.setString(6, propertyType);
+	  insertProperty.setInt(5, numOfBeds);
+	  insertProperty.setString(6, propertyStatus);
+	  insertProperty.setString(7, propertyType);
           int affectedRows = insertProperty.executeUpdate();
 
           if(affectedRows != 1) {

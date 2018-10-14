@@ -19,6 +19,9 @@ public class AddPropertyWindowController {
 	@FXML
     private TextField suburb;
 	
+	@FXML
+    private TextField num_of_beds;
+	
     @FXML
     private TextField property_type;
     
@@ -49,6 +52,11 @@ public class AddPropertyWindowController {
 		return property_status;
 	}
 
+	public TextField getNum_of_beds() {
+		return num_of_beds;
+	}
+
+	
 //	public Property getNewProperty() {
 //        String propertyId = property_Id.getText();
 //        String propertyType = property_type.getText();

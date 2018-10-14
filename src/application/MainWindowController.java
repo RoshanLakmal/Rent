@@ -99,7 +99,8 @@ public class MainWindowController {
             DataSource.getInstance().insertProperty(addPropertyController.getProperty_Id().getText(), 
             										addPropertyController.getStreet_num().getText(), 
             										addPropertyController.getStreet_name().getText(), 
-            										addPropertyController.getSuburb().getText(), 
+            										addPropertyController.getSuburb().getText(),
+            										Integer.parseInt(addPropertyController.getNum_of_beds().getText()),
             										addPropertyController.getProperty_status().getText(), 
             										addPropertyController.getProperty_type().getText());
             listPropertys();

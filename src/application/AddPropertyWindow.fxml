@@ -20,11 +20,14 @@
 			<Label text="Suburb" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
             <TextField fx:id="suburb" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
             
-            <Label text="Property Type" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-            <TextField fx:id="property_type" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+            <Label text="NumOfBeds" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <TextField fx:id="num_of_beds" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
             
-            <Label text="Property Status" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-            <TextField fx:id="property_status" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+            <Label text="Property Type" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <TextField fx:id="property_type" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+            
+            <Label text="Property Status" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+            <TextField fx:id="property_status" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
         </GridPane>
     </content>
 </DialogPane>

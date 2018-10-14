@@ -57,6 +57,11 @@
                         <PropertyValueFactory property="suburb"/>
                     </cellValueFactory>
                 </TableColumn>
+                <TableColumn text="NumOfBeds">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="num_of_beds"/>
+                    </cellValueFactory>
+                </TableColumn>
                  <TableColumn text="Property Status">
                     <cellValueFactory>
                         <PropertyValueFactory property="property_status"/>
