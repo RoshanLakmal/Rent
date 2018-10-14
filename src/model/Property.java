@@ -1,5 +1,10 @@
 package model;
 
+import java.sql.Date;
+
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public abstract class Property {
@@ -8,10 +13,10 @@ public abstract class Property {
 		protected SimpleStringProperty street_num;
 		protected SimpleStringProperty street_name;
 		protected SimpleStringProperty suburb;
-		protected int Num_of_beds;
+		protected SimpleIntegerProperty num_of_beds;
 		protected SimpleStringProperty property_type;
 		protected SimpleStringProperty property_status;
-		protected DateTime lastMaintenanceDate;
+		protected SimpleObjectProperty<DateTime> lastMaintenanceDate;
 		protected RentalRecords[] arr;
 
 		public Property(){
@@ -19,8 +24,10 @@ public abstract class Property {
 			this.street_num = new SimpleStringProperty();
 			this.street_name = new SimpleStringProperty();
 			this.suburb = new SimpleStringProperty();
+			this.num_of_beds = new SimpleIntegerProperty();
 			this.property_type = new SimpleStringProperty();
 			this.property_status = new SimpleStringProperty();
+			this.lastMaintenanceDate = new SimpleObjectProperty<>();
 		}
 
 //public Property(String property_Id, String Street_num, String Street_name, String Suburb, int Num_of_beds, String property_type, String property_status, DateTime lastMaintenanceDate)
@@ -97,8 +104,22 @@ public abstract class Property {
 	public void setProperty_status(String property_status) {
 		this.property_status.set(property_status);
 	}
-	
-	
+
+	public int getNum_of_beds() {
+		return num_of_beds.get();
+	}
+
+	public void setNum_of_beds(int num_of_beds) {
+		this.num_of_beds.set(num_of_beds);
+	}
+
+	public DateTime getLastMaintenanceDate() {
+		return lastMaintenanceDate.get();
+	}
+
+	public void setLastMaintenanceDate(DateTime lastMaintenanceDate) {
+		this.lastMaintenanceDate.set(lastMaintenanceDate);
+	}
 	
 }
 

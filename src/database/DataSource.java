@@ -26,7 +26,16 @@ public class DataSource {
 	 public static final String COLUMN_PROPERTY_STATUS = "property_status";
 	 public static final String COLUMN_PROPERTY_TYPE = "property_type";
 	 
-	 
+//	 public static final String TABLE_RENTAL_RECORD = "RENTAL_RECORD";
+//	 public static final String COLUMN_RENTAL_RECORD_PROPERTY_ID = "property_Id_record_Id";
+//	 
+//	 public static final String COLUMN_RECORD_ID = "Record_Id";
+//	 public static final String COLUMN_CUSTOMER_ID = "Customer_Id";
+//	 public static final String COLUMN_RENTDATE= "RentDate";
+//	 public static final String COLUMN_ESTIMATED_RETURN_DATE = "Estimated_Return_Date";
+//	 public static final String COLUMN_ACTUAL_RETURN_DATE = "Actual_Return_Date";
+//	 public static final String COLUMN_RENTALFEE = "RentalFee";
+//	 public static final String COLUMN_LATE_FEE = "Late_Fee";
 	
 	 public static final String CREATE_PROPERTY_TABLE = "CREATE TABLE IF NOT EXISTS RENTAL_PROPERTY" +
 			 "(property_Id VARCHAR(255) not NULL, " +
@@ -36,6 +45,15 @@ public class DataSource {
              " property_status VARCHAR(255), " +
              " property_type VARCHAR(255), " +
              " PRIMARY KEY ( property_Id ))"; 
+	 
+//	 public static final String CREATE_RENTAL_RECORD_TABLE = "CREATE TABLE IF NOT EXISTS RENTAL_RECORD" +
+//			 "(Record_Id VARCHAR(255) not NULL, " +
+//             " property_Id_record_Id VARCHAR(255), " + 
+//             " street_name VARCHAR(255), " + 
+//             " suburb VARCHAR(255), " +
+//             " property_status VARCHAR(255), " +
+//             " property_type VARCHAR(255), " +
+//             " PRIMARY KEY ( property_Id ))"; 
 	 
 //	 public static final String CREATE_PROPERTY_TABLEE = "CREATE TABLE IF NOT EXISTS warehouses (\n"
 //             + "	id integer PRIMARY KEY,\n"
