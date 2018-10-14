@@ -3,6 +3,10 @@ package model;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Date;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+
 
 public class FlexiRentSystem {
 int propertyCount = 0;
@@ -21,6 +25,7 @@ public void MenuNavigation() {
 	System.out.println("Display All Properties :6");
 	System.out.println("Exit Program           :7");
 	System.out.print("Enter your choice      : ");
+
 	}
 
 

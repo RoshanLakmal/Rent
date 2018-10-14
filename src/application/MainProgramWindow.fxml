@@ -72,6 +72,11 @@
                         <PropertyValueFactory property="property_type"/>
                     </cellValueFactory>
                 </TableColumn>
+                <TableColumn text="LastMaintainance Date">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="lastMaintenanceDate"/>
+                    </cellValueFactory>
+                </TableColumn>
             </columns>
         </TableView>
     </center>

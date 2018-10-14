@@ -6,10 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
 
-import javafx.beans.property.SimpleStringProperty;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import model.*;
 
 public class DataSource {
@@ -72,7 +76,8 @@ public class DataSource {
 	            	+ COLUMN_SUBURB + ", "
 	            	+ COLUMN_NUM_OF_BEDS + ", " 
 	            	+ COLUMN_PROPERTY_STATUS + ", " 
-	            	+ COLUMN_PROPERTY_TYPE + ") VALUES(?, ?, ?, ?, ?, ?, ?)";
+	            	+ COLUMN_PROPERTY_TYPE + ", "
+	            	+ COLUMN_LASTMAINTENANCEDATE +") VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 	 
 	 public static final String QUERY_PROPERTY_ID = "SELECT " + COLUMN_PROPERTY_ID + " FROM " +
 			 TABLE_PROPERTY + " WHERE " + COLUMN_PROPERTY_ID + " = ?";
@@ -116,10 +121,19 @@ public class DataSource {
   
   public List<Property> queryArtists() {
 
+//	  DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");
+//	  String pattern = "yyyy-MM-dd";
+//	  SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+	  
+	  
+	  
       try(Statement statement = conn.createStatement();
           ResultSet results = statement.executeQuery("SELECT * FROM " + TABLE_PROPERTY)) {
 
           List<Property> property = new ArrayList<>();
+          
+//          DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+//    	  DateTime dt = formatter.parseDateTime("dfs");
           
           while(results.next()) {
         	  Property newProperty = null;
@@ -136,6 +150,7 @@ public class DataSource {
         		  newProperty.setNum_of_beds(results.getInt(COLUMN_NUM_OF_BEDS));
         		  newProperty.setProperty_status(results.getString(COLUMN_PROPERTY_STATUS));
         		  newProperty.setProperty_type(results.getString(COLUMN_PROPERTY_TYPE));
+        		  newProperty.setLastMaintenanceDate(stringToDateTime(results.getString(COLUMN_LASTMAINTENANCEDATE)));
 //        		  newProperty = new Apartment(results.getString(COLUMN_PROPERTY_ID),results.getString(COLUMN_PROPERTY_TYPE));
         	  }else if (results.getString(COLUMN_PROPERTY_TYPE).equals("SUIT")){
         		  newProperty = new Suit();
@@ -146,6 +161,7 @@ public class DataSource {
         		  newProperty.setNum_of_beds(results.getInt(COLUMN_NUM_OF_BEDS));
         		  newProperty.setProperty_status(results.getString(COLUMN_PROPERTY_STATUS));
         		  newProperty.setProperty_type(results.getString(COLUMN_PROPERTY_TYPE));  
+        		  newProperty.setLastMaintenanceDate(stringToDateTime(results.getString(COLUMN_LASTMAINTENANCEDATE)));
         	  }
 //        	  
 //              Property artist = new Property();
@@ -167,7 +183,18 @@ public class DataSource {
 
   }
   
-  public int insertProperty(String propertyId, String streetNum, String streetName, String suburb, int numOfBeds, String propertyStatus, String propertyType) throws SQLException {
+  private DateTime stringToDateTime(String sDateTime){
+	  String string = sDateTime;
+	  String[] parts = string.split("/");
+	  int day = Integer.parseInt(parts[0]);
+	  int month = Integer.parseInt(parts[1]);
+	  int year = Integer.parseInt(parts[2]);
+	  
+	  DateTime t = new DateTime(day,month,year);
+	  return t;
+  }
+  
+  public int insertProperty(String propertyId, String streetNum, String streetName, String suburb, int numOfBeds, String propertyStatus, String propertyType, DateTime lastMaintenanceDate) throws SQLException {
 
 //      queryAlbum.setString(1, name);
 //      ResultSet results = queryAlbum.executeQuery();
@@ -182,6 +209,7 @@ public class DataSource {
 	  insertProperty.setInt(5, numOfBeds);
 	  insertProperty.setString(6, propertyStatus);
 	  insertProperty.setString(7, propertyType);
+	  insertProperty.setString(8, lastMaintenanceDate.getFormattedDate());
           int affectedRows = insertProperty.executeUpdate();
 
           if(affectedRows != 1) {

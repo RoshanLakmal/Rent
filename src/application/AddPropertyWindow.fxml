@@ -28,6 +28,10 @@
             
             <Label text="Property Status" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
             <TextField fx:id="property_status" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+            
+            <Label text="Last MaintenanceDate" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+            <TextField fx:id="lastMaintenanceDate" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+            
         </GridPane>
     </content>
 </DialogPane>

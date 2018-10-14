@@ -28,6 +28,9 @@ public class AddPropertyWindowController {
     @FXML
     private TextField property_status;
     
+    @FXML
+    private TextField lastMaintenanceDate;
+    
     public TextField getProperty_Id() {
 		return property_Id;
 	}
@@ -55,6 +58,12 @@ public class AddPropertyWindowController {
 	public TextField getNum_of_beds() {
 		return num_of_beds;
 	}
+
+	public TextField getLastMaintenanceDate() {
+		return lastMaintenanceDate;
+	}
+	
+	
 
 	
 //	public Property getNewProperty() {

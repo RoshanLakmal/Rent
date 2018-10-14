@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import database.DataSource;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -102,11 +103,23 @@ public class MainWindowController {
             										addPropertyController.getSuburb().getText(),
             										Integer.parseInt(addPropertyController.getNum_of_beds().getText()),
             										addPropertyController.getProperty_status().getText(), 
-            										addPropertyController.getProperty_type().getText());
+            										addPropertyController.getProperty_type().getText(),
+            										stringToDateTime(addPropertyController.getLastMaintenanceDate().getText()));
             listPropertys();
 //            System.out.println(newContact.getDetails());
         }
 	}
+	
+	private DateTime stringToDateTime(String sDateTime){
+		  String string = sDateTime;
+		  String[] parts = string.split("/");
+		  int day = Integer.parseInt(parts[0]);
+		  int month = Integer.parseInt(parts[1]);
+		  int year = Integer.parseInt(parts[2]);
+		  
+		  DateTime t = new DateTime(day,month,year);
+		  return t;
+	  }
 }
 
 class GetAllPropertyTask extends Task {
